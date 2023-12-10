@@ -19,7 +19,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   Future<void> fetchData() async {
     try {
-      List<List<Order>> orders = await ApiService.fetchOrders();
+      List<List<Order>> orders =
+          await ApiService.fetchOrders(); // Utilisez ApiService directement
       setState(() {
         data = orders;
       });
@@ -43,27 +44,20 @@ class _OrdersScreenState extends State<OrdersScreen> {
             margin: EdgeInsets.all(8.0),
             child: Column(
               children: [
-                ListTile(
-                  title: Text(
-                      'Order ${orderIndex + 1}'), // Affiche le numéro de l'ordre
-                ),
-                for (int itemIndex = 0;
-                    itemIndex < orderItems.length;
-                    itemIndex++)
+                for (Order orderItem in orderItems)
                   ListTile(
                     leading: Image.network(
-                      orderItems[itemIndex].photo,
+                      orderItem.photo,
                       height: 50,
                       width: 50,
                       fit: BoxFit.cover,
                     ),
-                    title: Text('Name: ${orderItems[itemIndex].name}'),
+                    title: Text('Name: ${orderItem.name}'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Quantity: ${orderItems[itemIndex].quantity}'),
-                        if (orderItems[itemIndex].price != null)
-                          Text('Price: ${orderItems[itemIndex].price}'),
+                        Text('Quantity: ${orderItem.quantity}'),
+                        Text('Price: ${orderItem.price}'),
                       ],
                     ),
                   ),

@@ -1,54 +1,68 @@
-class Recipe {
-  dynamic idMeal;
-  String strMeal;
-  String? strDrinkAlternate;
-  dynamic idCategory;
-  String strArea;
-  String strInstructions;
-  String strMealThumb;
-  String strTags;
-  String strYoutube;
-  String strIngredient1;
-  String strIngredient2;
-  String strIngredient3;
-  String strIngredient4;
-  String strIngredient5;
+import 'dart:io';
 
-  Recipe({
-    required this.idMeal,
-    required this.strMeal,
-    this.strDrinkAlternate,
-    required this.idCategory,
-    required this.strArea,
-    required this.strInstructions,
-    required this.strMealThumb,
-    required this.strTags,
-    required this.strYoutube,
-    required this.strIngredient1,
-    required this.strIngredient2,
-    required this.strIngredient3,
-    required this.strIngredient4,
-    required this.strIngredient5,
+class Meal {
+  final String? id;
+  final String name;
+  final String area;
+  final String instructions;
+  final String thumbnail;
+  final String? tags;
+  final String youtubeLink;
+  final Map<String, String> ingredients;
+  final String? sourceLink;
+  final String? imageSource;
+  final String? price;
+
+  Meal({
+    required this.id,
+    required this.name,
+    required this.area,
+    required this.instructions,
+    required this.thumbnail,
+    this.tags,
+    required this.youtubeLink,
+    required this.ingredients,
+    this.sourceLink,
+    this.imageSource,
+    this.price,
+    File? selectedImage,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(
-      idMeal: int.parse(json['idMeal']),
-      strMeal: json['strMeal'].toString(),
-      strDrinkAlternate: json['strDrinkAlternate']?.toString(),
-      idCategory: json['idCategory'] != null
-          ? int.tryParse(json['idCategory']) ?? 0
-          : 0,
-      strArea: json['strArea'].toString(),
-      strInstructions: json['strInstructions'].toString(),
-      strMealThumb: json['strMealThumb'].toString(),
-      strTags: json['strTags']?.toString() ?? "",
-      strYoutube: json['strYoutube'].toString(),
-      strIngredient1: json['strIngredient1'].toString(),
-      strIngredient2: json['strIngredient2'].toString(),
-      strIngredient3: json['strIngredient3'].toString(),
-      strIngredient4: json['strIngredient4'].toString(),
-      strIngredient5: json['strIngredient5'].toString(),
+  factory Meal.fromJson(Map<String, dynamic> json) {
+    return Meal(
+      id: json['id'],
+      name: json['strMeal'] ?? '',
+      area: json['strArea'] ?? '',
+      instructions: json['strInstructions'] ?? '',
+      thumbnail: json['strMealThumb'] ?? '',
+      tags: json['strTags'],
+      youtubeLink: json['strYoutube'] ?? '',
+      ingredients: {
+        'strIngredient1': json['strIngredient1'] ?? '',
+        'strIngredient2': json['strIngredient2'] ?? '',
+        // ... Add other ingredients here, checking for nullability
+      },
+      sourceLink: json['strSource'],
+      imageSource: json['strImageSource'],
+      price: json['price']?.toString(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'idMeal': id,
+      'strMeal': name,
+      'strArea': area,
+      'strInstructions': instructions,
+      'strMealThumb': thumbnail,
+      'strTags': tags,
+      'strYoutube': youtubeLink,
+      'strIngredient1': ingredients['strIngredient1'],
+      'strIngredient2': ingredients['strIngredient2'],
+      // ... Add other ingredients here, checking for nullability
+      'strSource': sourceLink,
+      'strImageSource': imageSource,
+      'price': price,
+    };
   }
 }

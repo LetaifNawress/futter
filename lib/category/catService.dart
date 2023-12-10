@@ -65,6 +65,17 @@ class ApiService {
     }
   }
 
+  static Future<List<String>> getCategoryIds() async {
+    final response = await http.get(Uri.parse(baseUrl));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      return data.map<String>((json) => json['id'].toString()).toList();
+    } else {
+      throw Exception('Failed to load category IDs');
+    }
+  }
+
   static Future<Category> getCategoryById(String categoryId) async {
     final response = await http.get(Uri.parse('$baseUrl/$categoryId'));
 
