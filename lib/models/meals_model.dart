@@ -40,7 +40,6 @@ class Meal {
       ingredients: {
         'strIngredient1': json['strIngredient1'] ?? '',
         'strIngredient2': json['strIngredient2'] ?? '',
-        // ... Add other ingredients here, checking for nullability
       },
       sourceLink: json['strSource'],
       imageSource: json['strImageSource'],
@@ -59,7 +58,6 @@ class Meal {
       'strYoutube': youtubeLink,
       'strIngredient1': ingredients['strIngredient1'],
       'strIngredient2': ingredients['strIngredient2'],
-      // ... Add other ingredients here, checking for nullability
       'strSource': sourceLink,
       'strImageSource': imageSource,
       'price': price,

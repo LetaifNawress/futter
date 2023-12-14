@@ -41,7 +41,6 @@ class ApiService {
     }
   }
 
-  // Update an existing order by order ID
   static Future<void> updateOrder(
       String orderId, List<Order> orderItems) async {
     final response = await http.put(
@@ -55,7 +54,6 @@ class ApiService {
     }
   }
 
-  // Delete an existing order by order ID
   static Future<void> deleteOrder(String orderId) async {
     final response = await http.delete(Uri.parse('$baseUrl/$orderId'));
 

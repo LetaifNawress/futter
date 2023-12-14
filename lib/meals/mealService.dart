@@ -32,8 +32,7 @@ class ApiService {
     final response = await http.put(
       Uri.parse('$baseUrl/${meal.id}'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(
-          meal.toJson()), // Utilisez meal.toJson() au lieu de Meal.toJson()
+      body: json.encode(meal.toJson()),
     );
 
     if (response.statusCode != 200) {

@@ -22,8 +22,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   Future<void> fetchData() async {
     try {
-      List<List<Order>> orders =
-          await ApiService.fetchOrders(); // Utilisez ApiService directement
+      List<List<Order>> orders = await ApiService.fetchOrders();
       setState(() {
         data = orders;
       });

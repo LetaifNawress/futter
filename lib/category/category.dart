@@ -136,7 +136,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     items: categoryImages.map((url) {
                       return DropdownMenuItem<String>(
                         value: url,
-                        child: Text(url),
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(url),
+                            ),
+                          ),
+                        ),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -305,14 +315,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  void _logout() {
-    nameController.clear();
-    descriptionController.clear();
-
-    // Naviguez vers l'écran de connexion (SigninPage dans cet exemple)
-    Navigator.pushReplacementNamed(context, '/signin');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -332,7 +334,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           padding: EdgeInsets.zero,
           children: [
             Container(
-              height: 100, // Ajustez la hauteur selon vos besoins
+              height: 100,
               child: DrawerHeader(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 196, 214, 230),
@@ -343,8 +345,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     'Menu',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize:
-                          18, // Ajustez la taille de la police selon vos besoins
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -393,7 +394,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       body: categories.isNotEmpty
           ? GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
               ),

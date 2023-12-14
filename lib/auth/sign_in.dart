@@ -125,16 +125,12 @@ class _SignInState extends State<SignIn> {
                       children: [
                         IconButton(
                           icon: FaIcon(FontAwesomeIcons.facebook),
-                          onPressed: () {
-                            // Gérer la connexion Facebook
-                          },
+                          onPressed: () {},
                         ),
                         SizedBox(width: 20.0),
                         IconButton(
                           icon: FaIcon(FontAwesomeIcons.google),
-                          onPressed: () {
-                            // Gérer la connexion Google
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     ),

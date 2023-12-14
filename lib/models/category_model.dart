@@ -13,19 +13,14 @@ class Category {
     required this.description,
   });
 
-  // Ajoutez une factory method pour créer une instance de Category à partir du Map
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      id: json['id'] ?? "", // Si 'id' est null, utilisez une chaîne vide
-      idCategory: json['idCategory'] != null
-          ? int.parse(json['idCategory'])
-          : 0, // Si 'idCategory' est null, utilisez 0 comme valeur par défaut
-      name: json['strCategory'] ??
-          "", // Si 'strCategory' est null, utilisez une chaîne vide
-      imageUrl: json['strCategoryThumb'] ??
-          "", // Si 'strCategoryThumb' est null, utilisez une chaîne vide
-      description: json['strCategoryDescription'] ??
-          "", // Si 'strCategoryDescription' est null, utilisez une chaîne vide
+      id: json['id'] ?? "",
+      idCategory:
+          json['idCategory'] != null ? int.parse(json['idCategory']) : 0,
+      name: json['strCategory'] ?? "",
+      imageUrl: json['strCategoryThumb'] ?? "",
+      description: json['strCategoryDescription'] ?? "",
     );
   }
 }

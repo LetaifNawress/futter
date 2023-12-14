@@ -3,7 +3,7 @@ class Order {
   final String name;
   final String photo;
   final int quantity;
-  final dynamic price; // Utilisez 'num' s'il peut être à la fois int et double
+  final dynamic price;
 
   Order({
     required this.id,
@@ -13,7 +13,6 @@ class Order {
     required this.price,
   });
 
-  // Ajoutez la méthode toJson pour sérialiser l'objet en JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

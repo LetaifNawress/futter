@@ -19,8 +19,6 @@ class ApiService {
     }
   }
 
-// ...
-
   static Future<void> addCategory(
       String name, String description, String imageUrl) async {
     final response = await http.post(
@@ -48,7 +46,7 @@ class ApiService {
       body: {
         'strCategory': name,
         'strCategoryDescription': description,
-        'strCategoryThumb': imageUrl, // Ajoutez le champ pour l'image
+        'strCategoryThumb': imageUrl,
       },
     );
 

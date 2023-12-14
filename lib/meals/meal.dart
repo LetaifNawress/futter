@@ -191,8 +191,8 @@ class _MealsScreenState extends State<MealsScreen> {
                           value: imageUrl,
                           child: Image.network(
                             imageUrl,
-                            width: 100, // Ajustez la largeur selon vos besoins
-                            height: 100, // Ajustez la hauteur selon vos besoins
+                            width: 100,
+                            height: 100,
                             fit: BoxFit.cover,
                           ),
                         );
@@ -260,14 +260,13 @@ class _MealsScreenState extends State<MealsScreen> {
 
         await ApiService.addMeal(newMeal);
         fetchMeals();
-        Navigator.pop(context); // Fermer la fenêtre de dialogue après l'ajout
+        Navigator.pop(context);
         showSuccessSnackBar('Meal added successfully!');
       } catch (e) {
         print('Error adding meal: $e');
         showErrorSnackBar('Error adding meal');
       }
     } else {
-      // Afficher un message à l'utilisateur s'il manque des informations
       showErrorSnackBar('Please fill in all fields.');
     }
   }
@@ -348,7 +347,7 @@ class _MealsScreenState extends State<MealsScreen> {
                     items: mealImages.map((url) {
                       return DropdownMenuItem<String>(
                         value: url,
-                        child: Text(url), // Customize this as needed
+                        child: Text(url),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -411,7 +410,6 @@ class _MealsScreenState extends State<MealsScreen> {
         Navigator.pop(context);
       } catch (e) {
         print('Error updating meal: $e');
-        // Display an error message to the user, for example, with a SnackBar
       }
     }
   }
@@ -438,7 +436,6 @@ class _MealsScreenState extends State<MealsScreen> {
                   Navigator.pop(context);
                 } catch (e) {
                   print('Error deleting meal: $e');
-                  // Display an error message to the user, for example, with a SnackBar
                 }
               },
               child: Text(
