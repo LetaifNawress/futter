@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/auth/sign_in.dart';
 import 'package:restaurant/category/catService.dart';
+import 'package:restaurant/meals/meal.dart';
 import 'package:restaurant/models/category_model.dart';
+import 'package:restaurant/orders/orders.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override
@@ -38,7 +41,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
       });
     } catch (e) {
       print('Error fetching categories: $e');
-      // Gérer les erreurs ici, par exemple, afficher un SnackBar à l'utilisateur
     }
   }
 
@@ -134,7 +136,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     items: categoryImages.map((url) {
                       return DropdownMenuItem<String>(
                         value: url,
-                        child: Text(url), // Customize this as needed
+                        child: Text(url),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -183,7 +185,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         Navigator.pop(context);
       } catch (e) {
         print('Error adding category: $e');
-        // Display an error message to the user, for example, with a SnackBar
       }
     }
   }
@@ -215,7 +216,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     items: categoryImages.map((url) {
                       return DropdownMenuItem<String>(
                         value: url,
-                        child: Text(url), // Customize this as needed
+                        child: Text(url),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -265,7 +266,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         Navigator.pop(context);
       } catch (e) {
         print('Error updating category: $e');
-        // Affichez un message d'erreur à l'utilisateur, par exemple, avec un SnackBar
       }
     }
   }
@@ -292,7 +292,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Navigator.pop(context);
                 } catch (e) {
                   print('Error deleting category: $e');
-                  // Display an error message to the user, for example, with a SnackBar
                 }
               },
               child: Text(
@@ -304,6 +303,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
         );
       },
     );
+  }
+
+  void _logout() {
+    nameController.clear();
+    descriptionController.clear();
+
+    // Naviguez vers l'écran de connexion (SigninPage dans cet exemple)
+    Navigator.pushReplacementNamed(context, '/signin');
   }
 
   @override
@@ -320,11 +327,74 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 100, // Ajustez la hauteur selon vos besoins
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 196, 214, 230),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    'Menu',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize:
+                          18, // Ajustez la taille de la police selon vos besoins
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.fastfood),
+              title: Text('Category'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text('Orders'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrdersScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.local_dining),
+              title: Text('Meals'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MealsScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignIn()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: categories.isNotEmpty
           ? GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                crossAxisSpacing: 36.0,
+                crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
               ),
               itemCount: categories.length,

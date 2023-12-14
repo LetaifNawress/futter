@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/Orders/ordersService.dart';
+import 'package:restaurant/auth/sign_in.dart';
+import 'package:restaurant/category/category.dart';
+import 'package:restaurant/meals/meal.dart';
 import 'package:restaurant/models/Orders_model.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -34,6 +37,73 @@ class _OrdersScreenState extends State<OrdersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Orders Screen'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignIn()),
+              );
+            },
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 171, 189, 204),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.fastfood),
+              title: Text('Category'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => CategoryScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text('Orders'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.local_dining),
+              title: Text('Meals'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MealsScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignIn()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: data.length,
